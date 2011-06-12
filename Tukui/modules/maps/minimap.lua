@@ -9,7 +9,7 @@ TukuiMinimap:RegisterEvent("ADDON_LOADED")
 TukuiMinimap:RegisterEvent("CALENDAR_UPDATE_PENDING_INVITES")
 TukuiMinimap:RegisterEvent("UPDATE_PENDING_MAIL")
 TukuiMinimap:RegisterEvent("PLAYER_ENTERING_WORLD")
-TukuiMinimap:Point("TOPRIGHT", UIParent, "TOPRIGHT", -24, -22)
+TukuiMinimap:Point("TOPRIGHT", UIParent, "TOPRIGHT", -24, -24)
 TukuiMinimap:Size(144)
 TukuiMinimap:SetClampedToScreen(true)
 TukuiMinimap:SetMovable(true)
@@ -126,28 +126,28 @@ TukuiMinimap:SetScript("OnEvent", function(self, event, addon)
 		local inv = CalendarGetNumPendingInvites()
 		local mail = HasNewMail()
 		if inv > 0 and mail then -- New invites and mail
-			TukuiMinimap:SetBackdropBorderColor(1, .5, 0)
+			TukuiMinimap:SetBackdropBorderColor(.2,.2,.2,1)
 			if TukuiMinimapStatsLeft then
-				TukuiMinimapStatsLeft:SetBackdropBorderColor(1, .5, 0)
+				TukuiMinimapStatsLeft:SetBackdropBorderColor(.2,.2,.2,1)
 			end
 			if TukuiMinimapStatsRight then
-				TukuiMinimapStatsRight:SetBackdropBorderColor(1, .5, 0)
+				TukuiMinimapStatsRight:SetBackdropBorderColor(.2,.2,.2,1)
 			end
 		elseif inv > 0 and not mail then -- New invites and no mail
-			TukuiMinimap:SetBackdropBorderColor(1, 30/255, 60/255)
+			TukuiMinimap:SetBackdropBorderColor(.2,.2,.2,1)
 			if TukuiMinimapStatsLeft then
-				TukuiMinimapStatsLeft:SetBackdropBorderColor(1, 30/255, 60/255)
+				TukuiMinimapStatsLeft:SetBackdropBorderColor(.2,.2,.2,1)
 			end
 			if TukuiMinimapStatsRight then
-				TukuiMinimapStatsRight:SetBackdropBorderColor(1, 30/255, 60/255)
+				TukuiMinimapStatsRight:SetBackdropBorderColor(.2,.2,.2,1)
 			end
 		elseif inv==0 and mail then -- No invites and new mail
-			TukuiMinimap:SetBackdropBorderColor(0, 1, 0)
+			TukuiMinimap:SetBackdropBorderColor(.2,.2,.2,1)
 			if TukuiMinimapStatsLeft then
-				TukuiMinimapStatsLeft:SetBackdropBorderColor(0, 1, 0)
+				TukuiMinimapStatsLeft:SetBackdropBorderColor(.2,.2,.2,1)
 			end
 			if TukuiMinimapStatsRight then
-				TukuiMinimapStatsRight:SetBackdropBorderColor(0, 1, 0)
+				TukuiMinimapStatsRight:SetBackdropBorderColor(.2,.2,.2,1)
 			end
 		else -- None of the above
 			TukuiMinimap:SetBackdropBorderColor(unpack(C.media.bordercolor))

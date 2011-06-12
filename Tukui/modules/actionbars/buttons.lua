@@ -3,92 +3,7 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 -- I really hope you'll understand the code, because I was totally drunk when I wrote this file.
 -- At least, it work fine. :P (lol)
 
-local function ShowOrHideBar(bar, button)
-	local db = TukuiDataPerChar
-	
-	if bar:IsShown() then
-		if bar == TukuiBar5 and T.lowversion then
-			if button == TukuiBar5ButtonTop then
-				if TukuiBar7:IsShown() then
-					TukuiBar7:Hide()
-					bar:SetWidth((T.buttonsize * 2) + (T.buttonspacing * 3))
-					db.hidebar7 = true
-				elseif TukuiBar6:IsShown() then
-					TukuiBar6:Hide()
-					bar:SetWidth((T.buttonsize * 1) + (T.buttonspacing * 2))
-					db.hidebar6 = true
-				else
-					bar:Hide()
-				end
-			else
-				if button == TukuiBar5ButtonBottom then
-					if not bar:IsShown() then
-						bar:Show()
-						bar:SetWidth((T.buttonsize * 1) + (T.buttonspacing * 2))
-					elseif not TukuiBar6:IsShown() then
-						TukuiBar6:Show()
-						bar:SetWidth((T.buttonsize * 2) + (T.buttonspacing * 3))
-						db.hidebar6 = false
-					else
-						TukuiBar7:Show()
-						bar:SetWidth((T.buttonsize * 3) + (T.buttonspacing * 4))
-						db.hidebar7 = false
-					end
-				end
-			end
-		else
-			bar:Hide()
-		end
-		
-		-- for bar 2½+3½+4, high reso only
-		if bar == TukuiBar4 then
-			TukuiBar1:SetHeight((T.buttonsize * 1) + (T.buttonspacing * 2))
-			TukuiBar2:SetHeight(TukuiBar1:GetHeight())
-			TukuiBar3:SetHeight(TukuiBar1:GetHeight())
-			TukuiBar2Button:SetHeight(TukuiBar1:GetHeight())
-			TukuiBar3Button:SetHeight(TukuiBar1:GetHeight())
-			if not T.lowversion then
-				for i = 7, 12 do
-					local left = _G["MultiBarBottomLeftButton"..i]
-					local right = _G["MultiBarBottomRightButton"..i]
-					left:SetAlpha(0)
-					right:SetAlpha(0)
-				end
-			end
-		end
-	else
-		if bar == TukuiBar5 and T.lowversion then
-			if TukuiBar7:IsShown() then
-				TukuiBar7:Show()
-				TukuiBar5:SetWidth((T.buttonsize * 3) + (T.buttonspacing * 4))
-			elseif TukuiBar6:IsShown() then
-				TukuiBar6:Show()
-				TukuiBar5:SetWidth((T.buttonsize * 2) + (T.buttonspacing * 3))
-			else
-				bar:Show()
-			end
-		else
-			bar:Show()
-		end
-		
-		-- for bar 2½+3½+4, high reso only
-		if bar == TukuiBar4 then
-			TukuiBar1:SetHeight((T.buttonsize * 2) + (T.buttonspacing * 3))
-			TukuiBar2:SetHeight(TukuiBar4:GetHeight())
-			TukuiBar3:SetHeight(TukuiBar4:GetHeight())
-			TukuiBar2Button:SetHeight(TukuiBar2:GetHeight())
-			TukuiBar3Button:SetHeight(TukuiBar3:GetHeight())
-			if not T.lowversion then
-				for i = 7, 12 do
-					local left = _G["MultiBarBottomLeftButton"..i]
-					local right = _G["MultiBarBottomRightButton"..i]
-					left:SetAlpha(1)
-					right:SetAlpha(1)
-				end
-			end
-		end
-	end
-end
+
 
 local function MoveButtonBar(button, bar)
 	local db = TukuiDataPerChar
@@ -194,23 +109,6 @@ TukuiBar2Button.text = T.SetFontString(TukuiBar2Button, C.media.uffont, 20)
 TukuiBar2Button.text:Point("CENTER", 1, 1)
 TukuiBar2Button.text:SetText("|cff4BAF4C>|r")
 
-local TukuiBar3Button = CreateFrame("Button", "TukuiBar3Button", UIParent)
-TukuiBar3Button:Width(17)
-TukuiBar3Button:SetHeight(TukuiBar3:GetHeight())
-if T.lowversion then
-	TukuiBar3Button:Point("BOTTOMLEFT", TukuiBar1, "BOTTOMRIGHT", 2, 0)
-else
-	TukuiBar3Button:Point("BOTTOMLEFT", TukuiBar3, "BOTTOMRIGHT", 2, 0)
-end
-TukuiBar3Button:SetTemplate("Default")
-TukuiBar3Button:RegisterForClicks("AnyUp")
-TukuiBar3Button:SetAlpha(0)
-TukuiBar3Button:SetScript("OnClick", function(self) DrPepper(self, TukuiBar3) end)
-TukuiBar3Button:SetScript("OnEnter", function(self) self:SetAlpha(1) end)
-TukuiBar3Button:SetScript("OnLeave", function(self) self:SetAlpha(0) end)
-TukuiBar3Button.text = T.SetFontString(TukuiBar3Button, C.media.uffont, 20)
-TukuiBar3Button.text:Point("CENTER", 1, 1)
-TukuiBar3Button.text:SetText("|cff4BAF4C<|r")
 
 local TukuiBar4Button = CreateFrame("Button", "TukuiBar4Button", UIParent)
 TukuiBar4Button:SetWidth(TukuiBar1:GetWidth())
@@ -226,34 +124,6 @@ TukuiBar4Button.text = T.SetFontString(TukuiBar4Button, C.media.uffont, 30)
 TukuiBar4Button.text:SetPoint("CENTER", 0, 0)
 TukuiBar4Button.text:SetText("|cff4BAF4C- - - - - -|r")
 
-local TukuiBar5ButtonTop = CreateFrame("Button", "TukuiBar5ButtonTop", UIParent)
-TukuiBar5ButtonTop:SetWidth(TukuiBar5:GetWidth())
-TukuiBar5ButtonTop:Height(17)
-TukuiBar5ButtonTop:Point("BOTTOM", TukuiBar5, "TOP", 0, 2)
-TukuiBar5ButtonTop:SetTemplate("Default")
-TukuiBar5ButtonTop:RegisterForClicks("AnyUp")
-TukuiBar5ButtonTop:SetAlpha(0)
-TukuiBar5ButtonTop:SetScript("OnClick", function(self) DrPepper(self, TukuiBar5) end)
-TukuiBar5ButtonTop:SetScript("OnEnter", function(self) self:SetAlpha(1) end)
-TukuiBar5ButtonTop:SetScript("OnLeave", function(self) self:SetAlpha(0) end)
-TukuiBar5ButtonTop.text = T.SetFontString(TukuiBar5ButtonTop, C.media.uffont, 20)
-TukuiBar5ButtonTop.text:Point("CENTER", 1, 1)
-TukuiBar5ButtonTop.text:SetText("|cff4BAF4C>|r")
-
-local TukuiBar5ButtonBottom = CreateFrame("Button", "TukuiBar5ButtonBottom", UIParent)
-TukuiBar5ButtonBottom:SetFrameLevel(TukuiBar5ButtonTop:GetFrameLevel() + 1)
-TukuiBar5ButtonBottom:SetWidth(TukuiBar5:GetWidth())
-TukuiBar5ButtonBottom:Height(17)
-TukuiBar5ButtonBottom:Point("TOP", TukuiBar5, "BOTTOM", 0, -2)
-TukuiBar5ButtonBottom:SetTemplate("Default")
-TukuiBar5ButtonBottom:RegisterForClicks("AnyUp")
-TukuiBar5ButtonBottom:SetAlpha(0)
-TukuiBar5ButtonBottom:SetScript("OnClick", function(self) DrPepper(self, TukuiBar5) end)
-TukuiBar5ButtonBottom:SetScript("OnEnter", function(self) self:SetAlpha(1) end)
-TukuiBar5ButtonBottom:SetScript("OnLeave", function(self) self:SetAlpha(0) end)
-TukuiBar5ButtonBottom.text = T.SetFontString(TukuiBar5ButtonBottom, C.media.uffont, 20)
-TukuiBar5ButtonBottom.text:Point("CENTER", 1, 1)
-if T.lowversion then TukuiBar5ButtonBottom.text:SetText("|cff4BAF4C<|r") else TukuiBar5ButtonBottom.text:SetText("|cff4BAF4C>|r") end
 
 -- exit vehicle button on left side of bottom action bar
 local vehicleleft = CreateFrame("Button", "TukuiExitVehicleButtonLeft", UIParent, "SecureHandlerClickTemplate")
@@ -269,19 +139,6 @@ vehicleleft.text:Point("CENTER", 1, 1)
 vehicleleft.text:SetText("|cff4BAF4CV|r")
 RegisterStateDriver(vehicleleft, "visibility", "[target=vehicle,exists] show;hide")
 
--- exit vehicle button on right side of bottom action bar
-local vehicleright = CreateFrame("Button", "TukuiExitVehicleButtonRight", UIParent, "SecureHandlerClickTemplate")
-vehicleright:SetAllPoints(TukuiBar3Button)
-vehicleright:SetTemplate("Default")
-vehicleright:SetFrameStrata(TukuiBar3Button:GetFrameStrata())
-vehicleright:SetFrameLevel(TukuiBar3Button:GetFrameLevel() + 1)
-vehicleright:SetBackdropBorderColor(75/255,  175/255, 76/255)
-vehicleright:RegisterForClicks("AnyUp")
-vehicleright:SetScript("OnClick", function() VehicleExit() end)
-vehicleright.text = T.SetFontString(vehicleright, C.media.uffont, 20)
-vehicleright.text:Point("CENTER", 1, 1)
-vehicleright.text:SetText("|cff4BAF4CV|r")
-RegisterStateDriver(vehicleright, "visibility", "[target=vehicle,exists] show;hide")
 
 --------------------------------------------------------------
 -- DrPepper taste is really good with Vodka. 

@@ -5,8 +5,8 @@ C["general"] = {
 	["uiscale"] = 0.71,                                 -- set your value (between 0.64 and 1) of your uiscale if autoscale is off
 	["overridelowtohigh"] = false,                      -- EXPERIMENTAL ONLY! override lower version to higher version on a lower reso.
 	["multisampleprotect"] = true,                      -- i don't recommend this because of shitty border but, voila!
-	["backdropcolor"] = { .1,.1,.1 },                   -- default backdrop color of panels
-	["bordercolor"] = { .6,.6,.6 },                     -- default border color of panels
+	["backdropcolor"] = { .05,.05,.05,1 },                   -- default backdrop color of panels
+	["bordercolor"] = { .2,.2,.2,1 },                     -- default border color of panels
 }
 
 C["unitframes"] = {
@@ -17,8 +17,8 @@ C["unitframes"] = {
 	["cblatency"] = false,                              -- enable castbar latency
 	["cbicons"] = true,                                 -- enable icons on castbar
 	["auratimer"] = true,                               -- enable timers on buffs/debuffs
-	["auratextscale"] = 11,                             -- the font size of buffs/debuffs timers on unitframes
-	["playerauras"] = false,                            -- enable auras
+	["auratextscale"] = 12,                             -- the font size of buffs/debuffs timers on unitframes
+	["playerauras"] = true,                            -- enable auras
 	["targetauras"] = true,                             -- enable auras on target unit frame
 	["lowThreshold"] = 20,                              -- global low threshold, for low mana warning.
 	["targetpowerpvponly"] = true,                      -- enable power text on pvp target only
@@ -28,13 +28,13 @@ C["unitframes"] = {
 	["charportrait"] = false,                           -- do i really need to explain this?
 	["maintank"] = false,                               -- enable maintank
 	["mainassist"] = false,                             -- enable mainassist
-	["unicolor"] = false,                               -- enable unicolor theme
+	["unicolor"] = true,                               -- enable unicolor theme
 	["combatfeedback"] = true,                          -- enable combattext on player and target.
 	["playeraggro"] = true,                             -- color player border to red if you have aggro on current target.
 	["healcomm"] = false,                               -- enable healprediction support.
 	["onlyselfdebuffs"] = false,                        -- display only our own debuffs applied on target
-	["showfocustarget"] = true,                         -- show focus target
-	["bordercolor"] = { .4,.4,.4 },                     -- unit frames panel border color
+	["showfocustarget"] = false,                         -- show focus target
+	["bordercolor"] = { 0,0,0,1 },                     -- unit frames panel border color
 
 	-- raid layout (if one of them is enabled)
 	["showrange"] = true,                               -- show range opacity on raidframes
@@ -73,6 +73,7 @@ C["actionbar"] = {
 	["buttonsize"] = 27,                                -- normal buttons size
 	["petbuttonsize"] = 29,                             -- pet & stance buttons size
 	["buttonspacing"] = 4,                              -- buttons spacing
+	["rightbars"] = 3,
 }
 
 C["bags"] = {
@@ -121,8 +122,7 @@ C["datatext"] = {
 C["chat"] = {
 	["enable"] = true,                                  -- blah
 	["whispersound"] = true,                            -- play a sound when receiving whisper
-	["background"] = false,
-}
+	}
 
 C["nameplate"] = {
 	["enable"] = true,                                  -- enable nice skinned nameplates that fit into tukui
